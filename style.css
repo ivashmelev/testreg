@@ -1,0 +1,37 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.form-input {
+  margin: 20px;
+  display: block;
+}
+
+.element{
+  width: 50%;
+  border: 1px solid black;
+  padding: 20px;
+  margin: 20px;
+}
+
+.btn, .send{
+  margin: 20px;
+  width: 10%;
+}
+
+.map{
+  width: 600px;
+  height: 400px;
+  margin: 20px;
+}
+
+.hide{
+  display: none;
+}
+
+
+
