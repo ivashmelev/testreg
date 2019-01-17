@@ -1,0 +1,23 @@
+.element-user{
+  margin: 20px;
+}
+
+.user{
+  display: flex;
+  margin-right: 20px;
+}
+
+.form{
+  display: flex;
+  margin-right: 20px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.btn{
+  justify-content: flex-end;
+  width: max-content;
+  height: 20px;
+}

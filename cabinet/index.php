@@ -33,6 +33,8 @@ if($_SESSION["access"]){
   $data = mysqli_fetch_array($query);
 
   print_r($data);
+  $_SESSION["data"]=$data;
+  print_r($_SESSION["data"]);
 }
 else{
   header("Location: /auth.php");
@@ -56,7 +58,7 @@ else{
     <form class="form" type="post" action="../update_user.php">
       <div class="element">
         <?=$data["FIO"];?>
-        <input class="form-input hide" type="text" id="fio" name="fio">
+        <input class="form-input hide" type="text" id="fio" name="fio" value="<?=$data["FIO"];?>">
       </div>
       
       <div class="element">
@@ -69,25 +71,25 @@ else{
         
       <div class="element" >
         <?=$data["number"];?>
-        <input class="form-input hide" type="text" id="number" name="number">
+        <input class="form-input hide" type="text" id="number" name="number" value="<?=$data["number"];?>">
       </div>
         
       <div class="element" id="city">
         <?=$data["city"];?>
-          <input class="form-input hide" type="text" id="city" name="city">
+          <input class="form-input hide" type="text" id="city" name="city" value="<?=$data["city"];?>">
       </div>
       
       <div class="element" id="street">
         <?=$data["street"];?>
-          <input class="form-input hide" type="text" id="street" name="street">
+          <input class="form-input hide" type="text" id="street" name="street" value="<?=$data["street"];?>">
       </div>
 
       <div class="element" id=home>
         <?=$data["home"];?>
-          <input class="form-input hide" type="text" id="home" name="home">
+          <input class="form-input hide" type="text" id="home" name="home" value="<?=$data["home"];?>">
       </div>
 
-      <input type="hidden" name="login" id="login" value="<?=$data["login"];?>">
+      <input type="hidden" name="login" id="login" value="<?=$data["login"];?>" >
       <button class="btn">Change</button>
       <button class="send hide">Ok</button>
     </form>
