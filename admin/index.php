@@ -1,17 +1,28 @@
 <?php
 
-require_once ("../config.php");
+session_start();
+if($_SESSION["isAdmin"]){
+  require_once ("../config.php");
 
-$link = mysqli_connect(HOST, USER, PASSWORD, DATABASE) or die("Error - ".mysqli_error($link));
-$query = mysqli_query($link, "SELECT * FROM users");
+  $link = mysqli_connect(HOST, USER, PASSWORD, DATABASE) or die("Error - ".mysqli_error($link));
+  $query = mysqli_query($link, "SELECT * FROM users");
 
-$arrResult = [];
-$i=1;
+  $arrResult = [];
+  $i=1;
+  $arrPlace = [];
 
-while($data = mysqli_fetch_array($query)){
-  array_push($arrResult, $data);
+  while($data = mysqli_fetch_array($query)){
+    array_push($arrResult, $data);
+  }
+
+  foreach($arrResult as $value){
+    $strPlace = $value["city"]." ".$value["street"]." ".$value["home"];
+    array_push($arrPlace, $strPlace);
+  }
 }
-
+else{
+  header("Location: ../index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +39,9 @@ while($data = mysqli_fetch_array($query)){
   <title>Administrator</title>
 </head>
 <body>
+  <script>let place = <?=json_encode($arrPlace);?></script>
+    <button style="float:right; margin: 50px;" onclick="location.href = '../exit.php'">Выход</button>
+
     <?foreach($arrResult as $elem):?>
     <div class="user">
         <p class="element-user"><?=$i++;?> | </p>
@@ -64,5 +78,7 @@ while($data = mysqli_fetch_array($query)){
             </form>
       </div>
     <?endforeach?>
+    <div class="map" id="map"></div>
+    <script src="map.js"></script>
 </body>
 </html>

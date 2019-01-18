@@ -1,51 +1,40 @@
+<?
+session_start();
+
+if($_SESSION['access']){
+  header("Location: /cabinet/index.php");
+}
+?>
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style.css">
-  <title>Registration</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <script src="script.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Авторизация</title>
 </head>
 <body>
-  <div class="form">
-    <form action="add_user.php" method="post">
-      <label for="fio">ФИО</label>
-      <input class="form-input" type="text" id="fio" name="fio">
+  <form action="/cabinet/index.php" method="post" class="form-auth">
+    <label for="login">Логин</label>
+    <input class="form-input" type="text" name="login" id="login">
 
-      <label for="status">Статус</label>
-      <select class="form-input" name="status" id="status">
-        <option value="Физическое лицо" selected>Физическое лицо</option>
-        <option value="Юридическое лицо">Юридическое лицо</option>
-      </select>
+    <label for="pass">Пароль</label>
+    <input class="form-input" type="text" name="pass" id="pass">
 
-      <label for="number">Номер</label>
-      <input class="form-input" type="text" id="number" name="number">
+    <input class="form-input" type="submit" value="Ok">
 
-      <label for="addres">Адрес:</label>
-      <div class="addres" id="addres">
-        <label for="city">Город</label>
-        <input class="form-input" type="text" id="city" name="city">
+    <div class="window-captcha">
+                                <div class="g-recaptcha" data-sitekey="6Ldg1ooUAAAAAMDZc7abq-vYpbmw6x0H8wgSbDwE"></div>
 
-        <label for="street">Улица</label>
-        <input class="form-input" type="text" id="street" name="street">
+                                <div class="button-send" id="send_captcha">Отправить</div>
+                            </div>
 
-        <label for="home">Дом</label>
-        <input class="form-input" type="text" id="home" name="home">
-      </div>
+  <a href="auth.php">Регистрация</a>
 
-      <label for="login">Логин</label>
-      <input class="form-input" type="text" name="login" id="login">
-
-      <label for="pass">Пароль</label>
-      <input class="form-input" type="text" name="pass" id="pass">
-
-      <div class="captcha"></div>
-
-      <input type="submit" value="Ok">
-
-
-    </form>
-  </div>
+  </form>
 </body>
 </html>

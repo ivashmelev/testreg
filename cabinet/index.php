@@ -1,44 +1,63 @@
 <?php 
+$captcha = strip_tags(htmlentities($_POST["g-recaptcha-response"]));
+if ($captcha=="" && $_SESSION["access"]==false){
+  header("Location: ../index.php");
+}
 session_start();
 
 require_once ("../config.php");
 
 $login = strip_tags(htmlentities($_POST["login"]));
 $pass = md5(strip_tags(htmlentities($_POST["pass"])));
-
 $arrLogin = [];
 $arrPass = [];
 
-$divnk = mysqli_connect(HOST, USER, PASSWORD, DATABASE) or die("Error - ".mysqdiv_error($divnk));
-$query = mysqli_query($divnk, "SELECT users.login,users.password FROM users");
+$link = mysqli_connect(HOST, USER, PASSWORD, DATABASE) or die("Error - ".mysqli_error($link));
+$query = mysqli_query($link, "SELECT users.login,users.password FROM users");
+$queryAdmin = mysqli_query($link, "SELECT admin.login, admin.password FROM admin");
+
+$dataAdmin = mysqli_fetch_array($queryAdmin);
+// print_r($dataAdmin);
 
 while($data = mysqli_fetch_array($query)){
   array_push($arrLogin, $data["login"]);
   array_push($arrPass, $data["password"]);
 }
 
-for($i=0; $i<count($arrLogin); $i++){
-  if($arrLogin[$i]==$login && $arrPass[$i]==$pass){
-    $_SESSION["access"]=true;
-    break;
-  }
-  else{
-    $_SESSION["access"]=false;
-  }
-}
-
-if($_SESSION["access"]){
-
-  $query = mysqli_query($divnk, "SELECT * FROM users WHERE users.login='$login' AND users.password='$pass'");
-  $data = mysqli_fetch_array($query);
-
-  print_r($data);
-  $_SESSION["data"]=$data;
-  print_r($_SESSION["data"]);
+if($dataAdmin["login"]==$login && $dataAdmin["password"]==$pass){
+  $_SESSION["isAdmin"]=true;
+  // echo "true";
+  header("Location: ../admin/index.php");
 }
 else{
-  header("Location: /auth.php");
+  $_SESSION["isAdmin"]=false;
+  // echo "false";
+
 }
+
+if($_SESSION["isAdmin"]==false){
+  for($i=0; $i<count($arrLogin); $i++){
+    if($arrLogin[$i]==$login && $arrPass[$i]==$pass){
+      $_SESSION["access"]=true;
+      break;
+    }
+    else{
+      $_SESSION["access"]=false;
+    }
+  }
+  
+  if($_SESSION["access"]){
+  
+    $query = mysqli_query($link, "SELECT * FROM users WHERE users.login='$login' AND users.password='$pass'");
+    $data = mysqli_fetch_array($query);
+  
+    $_SESSION["data"]=$data;
+  }
+  else{
+    header("Location: /index.php");
+  }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -91,9 +110,13 @@ else{
 
       <input type="hidden" name="login" id="login" value="<?=$data["login"];?>" >
       <button class="btn">Change</button>
+      
       <button class="send hide">Ok</button>
-    </form>
 
+      <button class="btn" style="margin: 50px;" onclick="location.href = '/exit.php'">Выход</button>
+
+      <a href="products.php" style="margin-bottom: 20px;">Товары</a>
+    </form>
   </div>
 
   <div class="map" id="map"></div>
