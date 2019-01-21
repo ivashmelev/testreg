@@ -16,15 +16,15 @@
   $link = mysqli_connect(HOST, USER, PASSWORD, DATABASE) or die("Error - ".mysqli_error($link));
   $query = mysqli_query($link, "INSERT INTO users VALUES(NULL, '$fio', '$status', '$number', '$city', '$street', '$home', '$login', '$pass')");
 
-  // smtpmail('Testreg', 'r3g.test@yandex.ru', 'Registration - '.$_SERVER["HTTP_HOST"],
-  //                                                               "ФИО: $fio <br/>
-  //                                                               Статус: $status <br/>
-  //                                                               Номер: $number <br/>
-  //                                                               Город: $city <br/>
-  //                                                               Улица: $street <br/>
-  //                                                               Дом: $home <br/>
-  //                                                               Логин: $login <br/>
-  //                                                               Пароль: $pass <br/>");
+  smtpmail('Testreg', 'r3g.test@yandex.ru', 'Registration - '.$_SERVER["HTTP_HOST"],
+                                                                "ФИО: $fio <br/>
+                                                                Статус: $status <br/>
+                                                                Номер: $number <br/>
+                                                                Город: $city <br/>
+                                                                Улица: $street <br/>
+                                                                Дом: $home <br/>
+                                                                Логин: $login <br/>
+                                                                Пароль: $pass <br/>");
 
   header("Location: .");
 

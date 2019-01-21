@@ -39,7 +39,9 @@ else{
   <title>Administrator</title>
 </head>
 <body>
-  <script>let place = <?=json_encode($arrPlace);?></script>
+  <script>
+    let place = <?=json_encode($arrPlace);?> //Отправка массива адресов юзеров из бека во фронт
+  </script> 
     <button style="float:right; margin: 50px;" onclick="location.href = '../exit.php'">Выход</button>
 
     <?foreach($arrResult as $elem):?>

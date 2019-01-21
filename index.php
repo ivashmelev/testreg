@@ -1,4 +1,6 @@
 <?
+//Окно авторизации
+
 session_start();
 
 if($_SESSION['access']){
@@ -30,7 +32,6 @@ if($_SESSION['access']){
     <div class="window-captcha">
                                 <div class="g-recaptcha" data-sitekey="6Ldg1ooUAAAAAMDZc7abq-vYpbmw6x0H8wgSbDwE"></div>
 
-                                <div class="button-send" id="send_captcha">Отправить</div>
                             </div>
 
   <a href="auth.php">Регистрация</a>

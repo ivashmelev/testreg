@@ -17,7 +17,6 @@ $query = mysqli_query($link, "SELECT users.login,users.password FROM users");
 $queryAdmin = mysqli_query($link, "SELECT admin.login, admin.password FROM admin");
 
 $dataAdmin = mysqli_fetch_array($queryAdmin);
-// print_r($dataAdmin);
 
 while($data = mysqli_fetch_array($query)){
   array_push($arrLogin, $data["login"]);
@@ -26,12 +25,10 @@ while($data = mysqli_fetch_array($query)){
 
 if($dataAdmin["login"]==$login && $dataAdmin["password"]==$pass){
   $_SESSION["isAdmin"]=true;
-  // echo "true";
   header("Location: ../admin/index.php");
 }
 else{
   $_SESSION["isAdmin"]=false;
-  // echo "false";
 
 }
 

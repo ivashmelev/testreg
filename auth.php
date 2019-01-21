@@ -1,8 +1,20 @@
 <?
+//Окно регистрации
+
 session_start();
 
 if($_SESSION['access']){
   header("Location: /cabinet/index.php");
+}else{
+  require_once ("config.php");
+  $link = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
+  $query = mysqli_query($link, "SELECT name FROM city");
+
+  $arrCities = [];
+  $arrData = [];
+  while($data = mysqli_fetch_array($query)){
+    array_push($arrCities, $data["name"]);
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -36,7 +48,12 @@ if($_SESSION['access']){
       <label for="addres">Адрес:</label>
       <div class="addres" id="addres">
         <label for="city">Город</label>
-        <input class="form-input" type="text" id="city" name="city">
+        <input class="form-input" type="text" id="city" name="city" list="listCity" autocomplete="off">
+        <datalist id="listCity">
+          <?foreach($arrCities as $item):?>
+          <option value="<?=$item;?>"></option> <!--Не нашел времени для реализации этого через ajax, этого раньше не делал -->
+          <?endforeach?>
+        </datalist>
 
         <label for="street">Улица</label>
         <input class="form-input" type="text" id="street" name="street">

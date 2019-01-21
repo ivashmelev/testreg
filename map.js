@@ -1,4 +1,5 @@
 window.onload = () =>{
+    //Реализация карты для Юзера
 
   let city = document.getElementById("city");
   let street = document.getElementById("street");

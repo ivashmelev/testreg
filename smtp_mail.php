@@ -1,12 +1,12 @@
 <?
 //Отправка письма через smtp Яндекса
-$config['smtp_username'] = 'r3g.test@yandex.ru';  //Смените на адрес своего почтового ящика.
+$config['smtp_username'] = 'r3g.test@yandex.ru';  //адрес своего почтового ящика.
 $config['smtp_port'] = '465'; // Порт работы.
 $config['smtp_host'] =  'ssl://smtp.yandex.ru';  //сервер для отправки почты
-$config['smtp_password'] = 'testregadmin';  //Измените пароль
-$config['smtp_debug'] = true;  //Если Вы хотите видеть сообщения ошибок, укажите true вместо false
+$config['smtp_password'] = 'testregadmin';  //пароль
+$config['smtp_debug'] = true;  //сообщения ошибок, 
 $config['smtp_charset'] = 'utf-8';	//кодировка сообщений. (windows-1251 или utf-8, итд)
-$config['smtp_from'] = 'Registration'; //Ваше имя - или имя Вашего сайта. Будет показывать при прочтении в поле "От кого"
+$config['smtp_from'] = 'Registration'; //имя - или имя  сайта. Будет показывать при прочтении в поле "От кого"
 	
 function smtpmail($to='', $mail_to, $subject, $message, $headers='') {
 	global $config;

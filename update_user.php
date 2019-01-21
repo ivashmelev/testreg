@@ -1,5 +1,5 @@
 <?php 
-
+//Обновление данных в базе
 require_once ("config.php");
 
 $fio = strip_tags(htmlentities($_POST["fio"]));
